@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MOCK_GENERAL_NAV, MOCK_PROJECTS } from "@/constants/mock-data";
 
@@ -21,6 +21,8 @@ export function SidebarNav({ className, onItemClick }: SidebarNavProps) {
         return <LayoutDashboard className="size-4" />;
       case "FolderKanban":
         return <FolderKanban className="size-4" />;
+      case "Settings":
+        return <Settings className="size-4" />;
       default:
         return <FolderKanban className="size-4" />;
     }

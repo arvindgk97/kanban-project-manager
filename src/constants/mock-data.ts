@@ -38,6 +38,11 @@ export const MOCK_GENERAL_NAV: NavItem[] = [
     href: "/projects",
     icon: "FolderKanban",
   },
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: "Settings",
+  },
 ];
 
 export const MOCK_PROJECTS: ProjectItem[] = [
