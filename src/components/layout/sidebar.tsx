@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { X, Sparkles } from "lucide-react";
 import { WorkspaceSwitcher } from "@/components/navigation/workspace-switcher";
