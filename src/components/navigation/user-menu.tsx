@@ -14,14 +14,25 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+function getInitials(name: string): string {
+  if (!name) return "U";
+  const parts = name.trim().split(" ");
+  if (parts.length >= 2) {
+    return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase();
+  }
+  return name.slice(0, 2).toUpperCase();
+}
+
 export function UserMenu() {
+  const initials = getInitials(MOCK_USER.name);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 px-2 py-1.5 hover:bg-accent/60 transition-colors rounded-full sm:rounded-lg cursor-pointer outline-none">
         <Avatar className="size-8 border border-border/80">
           <AvatarImage src={MOCK_USER.avatarUrl} alt={MOCK_USER.name} />
           <AvatarFallback className="bg-indigo-600 text-white font-bold text-xs">
-            {MOCK_USER.name.charAt(0)}
+            {initials}
           </AvatarFallback>
         </Avatar>
         <div className="hidden sm:flex flex-col text-left">
