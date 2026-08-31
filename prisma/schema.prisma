@@ -31,7 +31,8 @@ model Workspace {
 
   owner User @relation(fields: [ownerId], references: [id])
 
-  members WorkspaceMember[]
+  members  WorkspaceMember[]
+  projects Project[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -50,4 +51,31 @@ model WorkspaceMember {
   createdAt DateTime @default(now())
 
   @@unique([workspaceId, userId])
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+
+  workspaceId String
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
+
+  boards Board[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Board {
+  id   String @id @default(uuid())
+  name String
+
+  projectId String
+
+  project Project @relation(fields: [projectId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
