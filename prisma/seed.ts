@@ -64,10 +64,19 @@ async function main() {
         },
     });
 
-    const project = await prisma.project.create({
-        data: {
+    const project = await prisma.project.upsert({
+        where: {
+            workspaceId_name: {
+                workspaceId: workspace.id,
+                name: "Kanban Project Manager",
+            },
+        },
+        update: {
+            description: "A collaborative project management application",
+        },
+        create: {
             name: "Kanban Project Manager",
-            description: "Project management application built with Next.js.",
+            description: "A collaborative project management application",
             workspaceId: workspace.id,
         },
     });
