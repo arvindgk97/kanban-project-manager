@@ -14,8 +14,14 @@ const prisma = new PrismaClient({
 async function main() {
     console.log("🌱 Starting seed...");
 
-    const user = await prisma.user.create({
-        data: {
+    const user = await prisma.user.upsert({
+        where: {
+            email: "arvin@example.com",
+        },
+        update: {
+            name: "Arvin",
+        },
+        create: {
             name: "Arvin",
             email: "arvin@example.com",
         },
@@ -23,8 +29,17 @@ async function main() {
 
     console.log("Created user:", user.name);
 
-    const workspace = await prisma.workspace.create({
-        data: {
+    const workspace = await prisma.workspace.upsert({
+        where: {
+            ownerId_name: {
+                ownerId: user.id,
+                name: "Personal Workspace",
+            },
+        },
+        update: {
+            name: "Personal Workspace",
+        },
+        create: {
             name: "Personal Workspace",
             ownerId: user.id,
         },

@@ -14,7 +14,3 @@ export default defineConfig({
     url: process.env["DATABASE_URL"],
   },
 });
-
-async function main() {
-  // seed code
-}
