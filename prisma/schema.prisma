@@ -110,6 +110,8 @@ model Column {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([boardId, name])
 }
 
 model Task {

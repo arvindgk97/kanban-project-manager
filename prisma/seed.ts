@@ -92,24 +92,51 @@ async function main() {
 
     console.log("Created board:", board.name);
 
-    const todo = await prisma.column.create({
-        data: {
+    const todo = await prisma.column.upsert({
+        where: {
+            boardId_name: {
+                boardId: board.id,
+                name: "Todo",
+            },
+        },
+        update: {
+            position: 0,
+        },
+        create: {
             name: "Todo",
             position: 0,
             boardId: board.id,
         },
     });
 
-    const inProgress = await prisma.column.create({
-        data: {
+    const inProgress = await prisma.column.upsert({
+        where: {
+            boardId_name: {
+                boardId: board.id,
+                name: "In Progress",
+            },
+        },
+        update: {
+            position: 1,
+        },
+        create: {
             name: "In Progress",
             position: 1,
             boardId: board.id,
         },
     });
 
-    const done = await prisma.column.create({
-        data: {
+    const done = await prisma.column.upsert({
+        where: {
+            boardId_name: {
+                boardId: board.id,
+                name: "Done",
+            },
+        },
+        update: {
+            position: 2,
+        },
+        create: {
             name: "Done",
             position: 2,
             boardId: board.id,
