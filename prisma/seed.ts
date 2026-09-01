@@ -83,8 +83,17 @@ async function main() {
 
     console.log("Created project:", project.name);
 
-    const board = await prisma.board.create({
-        data: {
+    const board = await prisma.board.upsert({
+        where: {
+            projectId_name: {
+                projectId: project.id,
+                name: "Main Board",
+            },
+        },
+        update: {
+            name: "Main Board",
+        },
+        create: {
             name: "Main Board",
             projectId: project.id,
         },
@@ -144,6 +153,14 @@ async function main() {
     });
 
     console.log("Created columns");
+
+    await prisma.task.deleteMany({
+        where: {
+            column: {
+                boardId: board.id,
+            },
+        },
+    });
 
     await prisma.task.create({
         data: {
