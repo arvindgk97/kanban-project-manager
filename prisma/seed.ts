@@ -47,10 +47,20 @@ async function main() {
 
     console.log("Created workspace:", workspace.name);
 
-    await prisma.workspaceMember.create({
-        data: {
+    await prisma.workspaceMember.upsert({
+        where: {
+            workspaceId_userId: {
+                workspaceId: workspace.id,
+                userId: user.id,
+            },
+        },
+        update: {
+            role: "OWNER",
+        },
+        create: {
             workspaceId: workspace.id,
             userId: user.id,
+            role: "OWNER",
         },
     });
 
