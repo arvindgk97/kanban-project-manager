@@ -28,3 +28,17 @@ export async function createWorkspace(
         },
     });
 }
+
+export async function updateWorkspace(
+    workspaceId: string,
+    name: string,
+) {
+    return prisma.workspace.update({
+        where: {
+            id: workspaceId,
+        },
+        data: {
+            name,
+        },
+    });
+}
