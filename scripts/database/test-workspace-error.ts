@@ -11,10 +11,10 @@ try {
     } as any;
 } catch {}
 
-import { NotFoundError } from "../src/lib/errors";
+import { NotFoundError } from "@/lib/errors";
 
 async function main() {
-    const { updateWorkspace } = await import("../src/lib/repositories/workspace.repository");
+    const { updateWorkspace } = await import("@/lib/repositories/workspace.repository");
 
     console.log("🧪 Testing repository error handling...\n");
 
@@ -44,7 +44,7 @@ main()
     })
     .finally(async () => {
         try {
-            const { prisma } = await import("../src/lib/prisma");
+            const { prisma } = await import("@/lib/prisma");
             await prisma.$disconnect();
         } catch {}
     });

@@ -12,7 +12,7 @@ try {
 } catch {}
 
 async function main() {
-    const { prisma } = await import("../src/lib/prisma");
+    const { prisma } = await import("@/lib/prisma");
 
     console.log("🔌 Testing database connection...");
 
@@ -29,7 +29,7 @@ main()
     })
     .finally(async () => {
         try {
-            const { prisma } = await import("../src/lib/prisma");
+            const { prisma } = await import("@/lib/prisma");
             await prisma.$disconnect();
         } catch {}
     });

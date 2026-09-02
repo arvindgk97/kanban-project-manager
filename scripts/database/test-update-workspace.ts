@@ -12,8 +12,8 @@ try {
 } catch {}
 
 async function main() {
-    const { prisma } = await import("../src/lib/prisma");
-    const { updateWorkspace } = await import("../src/lib/repositories/workspace.repository");
+    const { prisma } = await import("@/lib/prisma");
+    const { updateWorkspace } = await import("@/lib/repositories/workspace.repository");
 
     console.log("✏️ Testing update workspace...");
 
@@ -64,7 +64,7 @@ main()
     })
     .finally(async () => {
         try {
-            const { prisma } = await import("../src/lib/prisma");
+            const { prisma } = await import("@/lib/prisma");
             await prisma.$disconnect();
         } catch {}
     });
