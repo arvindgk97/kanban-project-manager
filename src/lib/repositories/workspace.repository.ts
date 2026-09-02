@@ -16,3 +16,15 @@ export async function getWorkspaceById(workspaceId: string) {
         },
     });
 }
+
+export async function createWorkspace(
+    name: string,
+    ownerId: string,
+) {
+    return prisma.workspace.create({
+        data: {
+            name,
+            ownerId,
+        },
+    });
+}
