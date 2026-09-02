@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { NotFoundError } from "@/lib/errors";
 
 export async function getWorkspaceById(workspaceId: string) {
     return prisma.workspace.findUnique({
@@ -33,6 +34,16 @@ export async function updateWorkspace(
     workspaceId: string,
     name: string,
 ) {
+    const workspace = await prisma.workspace.findUnique({
+        where: {
+            id: workspaceId,
+        },
+    });
+
+    if (!workspace) {
+        throw new NotFoundError("Workspace not found.");
+    }
+
     return prisma.workspace.update({
         where: {
             id: workspaceId,
@@ -44,6 +55,16 @@ export async function updateWorkspace(
 }
 
 export async function deleteWorkspace(workspaceId: string) {
+    const workspace = await prisma.workspace.findUnique({
+        where: {
+            id: workspaceId,
+        },
+    });
+
+    if (!workspace) {
+        throw new NotFoundError("Workspace not found.");
+    }
+
     return prisma.workspace.delete({
         where: {
             id: workspaceId,
