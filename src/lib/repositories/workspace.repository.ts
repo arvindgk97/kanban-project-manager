@@ -42,3 +42,11 @@ export async function updateWorkspace(
         },
     });
 }
+
+export async function deleteWorkspace(workspaceId: string) {
+    return prisma.workspace.delete({
+        where: {
+            id: workspaceId,
+        },
+    });
+}
