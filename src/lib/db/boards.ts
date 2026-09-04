@@ -40,6 +40,7 @@ export async function getBoardWithColumnsAndTasks(boardId: string) {
             id: boardId,
         },
         include: {
+            project: true,
             columns: {
                 orderBy: {
                     position: "asc",
