@@ -44,3 +44,27 @@ export async function getWorkspaceWithProjects(workspaceId: string) {
         },
     });
 }
+
+export async function createWorkspace(
+    name: string,
+    ownerId: string,
+) {
+    return prisma.$transaction(async (tx) => {
+        const workspace = await tx.workspace.create({
+            data: {
+                name,
+                ownerId,
+            },
+        });
+
+        await tx.workspaceMember.create({
+            data: {
+                workspaceId: workspace.id,
+                userId: ownerId,
+                role: "OWNER",
+            },
+        });
+
+        return workspace;
+    });
+}
